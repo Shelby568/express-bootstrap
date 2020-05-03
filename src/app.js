@@ -1,11 +1,13 @@
 const express = require('express');
+const { jokesController, randomJokeController, personalJokeController } = require('./controllers');
 
 const app = express();
+app.use(express.static('public'));
 
-app.get('/', (req, res) => {
-  res.send({
-    message: 'Hello world!',
-  });
-});
+app.get('/jokes', jokesController);
+
+app.get('/joke/random', randomJokeController);
+
+app.get('/joke/random/personal/:first/:last', personalJokeController);
 
 module.exports = app;
